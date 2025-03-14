@@ -1,7 +1,129 @@
-# **Project Objective (README.md Introduction)**  
+# **SharePoint Restricted Environment Data Collector**  
 
-The **SharePoint Restricted Environment Data Collector** is a PowerShell-based tool designed to extract as much information as possible from a SharePoint environment while operating in **locked-down or restricted conditions**. The script employs a **multi-method approach** to maximize data retrieval, leveraging **SharePoint Management Shell**, **Client-Side Object Model (CSOM)**, and **REST API** with built-in **fault tolerance and failover mechanisms**.  
+## **Overview**  
+The **SharePoint Restricted Environment Data Collector** is a **PowerShell-based tool** designed to gather as much information as possible from a **SharePoint environment** with **minimal dependencies**, even in **locked-down or restricted conditions**. The script automatically determines the best available method to extract data, utilizing:  
 
-Designed to run with **minimal dependencies**, the tool can function in environments with **limited user privileges** by automatically detecting available access methods and switching between them as necessary. It also collects **system-level diagnostics**, such as network status and running processes, to help users assess execution constraints. All gathered information is logged and output in **structured JSON and human-readable text formats** for easy analysis.  
+- **SharePoint Management Shell Cmdlets** (if available)  
+- **Client-Side Object Model (CSOM)** for SharePoint Online and On-Premises  
+- **SharePoint REST API** for modern authentication and fallback  
 
-With a **modular architecture**, built-in **error handling**, and **detailed logging**, this project provides a robust and adaptable solution for SharePoint data collection, even in highly restricted corporate or enterprise environments. Future enhancements may include additional authentication methods, PnP PowerShell integration, and extended data export capabilities.
+This tool also collects **system diagnostics**, including user permissions, network status, and running processes, to help identify potential execution constraints. All collected information is **logged and saved** in structured formats (**JSON and text**) for easy analysis.  
+
+---
+
+## **Features**  
+✅ **Multiple Data Retrieval Methods** – Uses SharePoint Management Shell, CSOM, and REST API, automatically switching based on availability.  
+✅ **Minimal Dependencies** – Runs without requiring additional modules, ensuring compatibility in locked-down environments.  
+✅ **Fault Tolerance & Failsafes** – Implements automatic retries, error handling, and fallback mechanisms for uninterrupted execution.  
+✅ **Detailed Logging & Output** – Generates execution logs and structured reports in JSON and human-readable text formats.  
+✅ **System Information Gathering** – Collects OS details, user permissions, and network diagnostics to assess environment restrictions.  
+
+---
+
+## **Installation & Usage**  
+
+### **Prerequisites**  
+- **Windows PowerShell 5.1+**  
+- **SharePoint access credentials**  
+- **Execution policy set to allow script execution** (`Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`)  
+
+### **Clone the Repository**  
+```sh
+git clone https://github.com/your-repo/sharepoint-data-collector.git
+cd sharepoint-data-collector
+```
+
+### **Run the Script**  
+```powershell
+.\src\SPDataCollector.ps1 -SiteUrl "https://your-sharepoint-site-url"
+```
+
+### **Example Output**  
+After execution, results are saved in the **`output/`** directory:  
+- `SPDataOutput.json` – Structured JSON report  
+- `SPDataOutput.txt` – Human-readable summary  
+
+Logs are stored in **`logs/SPDataCollector.log`**.  
+
+---
+
+## **Data Collection Methods & Failsafes**  
+
+| **Method** | **Description** | **Failsafe Mechanisms** |
+|------------|----------------|-------------------------|
+| **SharePoint Management Shell Cmdlets** | Uses `Get-SPSite`, `Get-SPWeb`, etc. to retrieve site collections, users, and permissions. | If unavailable, falls back to CSOM or REST API. |
+| **Client-Side Object Model (CSOM)** | Uses .NET-based CSOM to authenticate and query SharePoint data. | If CSOM fails, attempts REST API. |
+| **REST API** | Uses `_api/web` to retrieve site metadata and lists. | If REST API is blocked, logs failure and returns partial results. |
+| **System Information** | Retrieves OS version, user privileges, network status, and running processes. | If restricted, logs failures and continues execution. |
+
+---
+
+## **Repository Structure**  
+```
+sharepoint-data-collector/
+│── src/
+│   ├── SPDataCollector.ps1
+│   ├── modules/
+│   │   ├── CSOMHelper.psm1
+│   │   ├── RESTHelper.psm1
+│   │   ├── SystemInfoHelper.psm1
+│   │   ├── Logger.psm1
+│   │   └── Failsafe.psm1
+│   ├── config/
+│   │   ├── settings.json
+│   │   ├── credentials.template.json
+│   │   └── endpoints.json
+│── logs/
+│   ├── SPDataCollector.log
+│── output/
+│   ├── SPDataOutput.json
+│   ├── SPDataOutput.txt
+│── tests/
+│   ├── test_SPDataCollector.ps1
+│   ├── test_CSOMHelper.ps1
+│   ├── test_RESTHelper.ps1
+│── docs/
+│   ├── TECH_SPEC.md
+│   ├── USAGE.md
+│   ├── CHANGELOG.md
+│── .gitignore
+│── README.md
+```
+
+---
+
+## **Logging & Output**  
+All execution details, including successes and failures, are **logged in real time**.  
+
+### **Example Log Entry**  
+```
+[2025-03-14 12:34:56] INFO: SharePoint Management Shell detected.
+[2025-03-14 12:34:57] SUCCESS: Retrieved 3 site collections using Get-SPSite.
+[2025-03-14 12:35:10] ERROR: CSOM authentication failed. Retrying...
+[2025-03-14 12:35:15] ERROR: CSOM authentication failed. Moving to REST API.
+[2025-03-14 12:35:20] SUCCESS: Retrieved site info via REST API.
+```
+
+---
+
+## **Error Handling & Fallback Logic**  
+
+The script automatically handles common failures:  
+
+- **Permission Issues** – Falls back to another method if an API or cmdlet is blocked.  
+- **Authentication Errors** – Retries with alternative authentication methods where possible.  
+- **Network Issues** – Checks SharePoint connectivity before execution.  
+- **Execution Policy Restrictions** – Warns the user and suggests solutions.  
+
+---
+
+## **Future Enhancements**  
+🚀 **PnP PowerShell Support** – Expand capabilities using modern PnP PowerShell cmdlets.  
+📊 **Export to CSV & Excel** – Provide structured data for business reporting.  
+🔒 **Custom Authentication Methods** – Support app-based authentication for restricted environments.  
+🖥️ **GUI Interface** – Develop a simple UI for non-technical users.  
+
+---
+
+## **Conclusion**  
+The **SharePoint Restricted Environment Data Collector** is a powerful, **failsafe-driven** tool that maximizes **data extraction** while handling **locked-down access restrictions**. By dynamically selecting the best retrieval method and incorporating **robust error handling**, it ensures **reliable data collection** with **minimal setup**.  
