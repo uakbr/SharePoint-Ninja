@@ -1,0 +1,7 @@
+# **Project Objective (README.md Introduction)**  
+
+The **SharePoint Restricted Environment Data Collector** is a PowerShell-based tool designed to extract as much information as possible from a SharePoint environment while operating in **locked-down or restricted conditions**. The script employs a **multi-method approach** to maximize data retrieval, leveraging **SharePoint Management Shell**, **Client-Side Object Model (CSOM)**, and **REST API** with built-in **fault tolerance and failover mechanisms**.  
+
+Designed to run with **minimal dependencies**, the tool can function in environments with **limited user privileges** by automatically detecting available access methods and switching between them as necessary. It also collects **system-level diagnostics**, such as network status and running processes, to help users assess execution constraints. All gathered information is logged and output in **structured JSON and human-readable text formats** for easy analysis.  
+
+With a **modular architecture**, built-in **error handling**, and **detailed logging**, this project provides a robust and adaptable solution for SharePoint data collection, even in highly restricted corporate or enterprise environments. Future enhancements may include additional authentication methods, PnP PowerShell integration, and extended data export capabilities.
