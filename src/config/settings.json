@@ -1,0 +1,56 @@
+{
+    "general": {
+        "applicationName": "SharePoint Restricted Environment Data Collector",
+        "version": "0.1.0",
+        "outputDirectoryName": "output",
+        "logDirectoryName": "logs",
+        "maxLogSize": 10485760,
+        "maxLogs": 10
+    },
+    "logging": {
+        "defaultLogLevel": "INFO",
+        "consoleOutput": true,
+        "fileOutput": true,
+        "logFilePrefix": "SPDataCollector",
+        "includeTimestampInFilename": true,
+        "logFileExtension": ".log"
+    },
+    "retry": {
+        "maxRetries": 3,
+        "initialDelaySeconds": 2,
+        "backoffMultiplier": 2,
+        "maxDelaySeconds": 30,
+        "timeoutSeconds": 60
+    },
+    "sharepoint": {
+        "dataRetrievalMethods": ["SharePointCmdlets", "CSOM", "REST"],
+        "connectTimeout": 30,
+        "readTimeout": 60,
+        "defaultPageSize": 100,
+        "maxItemsPerQuery": 5000,
+        "includeSubsites": true,
+        "includeHiddenLists": false
+    },
+    "systemInfo": {
+        "collectOSInfo": true,
+        "collectPSEnvironment": true,
+        "collectUserPermissions": true,
+        "collectNetworkStatus": true,
+        "collectProcesses": true,
+        "collectSharePointComponents": true,
+        "collectExecutionPolicy": true
+    },
+    "output": {
+        "formats": ["JSON", "Text"],
+        "includeSystemInfo": true,
+        "includeTimestampInFilename": true,
+        "prettyPrintJSON": true,
+        "fileNamePattern": "SPDataOutput_{timestamp}"
+    },
+    "userInterface": {
+        "showProgressBar": true,
+        "coloredOutput": true,
+        "verboseConsoleOutput": false,
+        "showMethodSwitching": true
+    }
+} 

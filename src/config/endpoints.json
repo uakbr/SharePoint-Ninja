@@ -1,0 +1,121 @@
+{
+    "rest": {
+        "sharePointOnline": {
+            "baseUrl": "{siteUrl}/_api",
+            "apiVersion": "v1.0",
+            "endpoints": {
+                "currentUser": "/web/currentuser",
+                "site": "/site",
+                "web": "/web",
+                "webs": "/web/webs",
+                "lists": "/web/lists",
+                "list": "/web/lists(guid'{0}')",
+                "listItems": "/web/lists(guid'{0}')/items",
+                "contentTypes": "/web/contenttypes",
+                "features": "/web/features",
+                "fields": "/web/fields",
+                "roleDefinitions": "/web/roledefinitions",
+                "groups": "/web/sitegroups",
+                "groupUsers": "/web/sitegroups({0})/users",
+                "webUsers": "/web/siteusers",
+                "files": "/web/getfolderbyserverrelativeurl('{0}')/files",
+                "folders": "/web/getfolderbyserverrelativeurl('{0}')/folders",
+                "search": "/search/query?querytext='{0}'",
+                "userProfiles": "/SP.UserProfiles.PeopleManager/GetMyProperties",
+                "taxonomy": "/SP.Taxonomy.TaxonomySession",
+                "regionalSettings": "/web/regionalsettings",
+                "allProperties": "/web/allproperties"
+            },
+            "headers": {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose"
+            }
+        },
+        "sharePointOnPremises": {
+            "baseUrl": "{siteUrl}/_api",
+            "endpoints": {
+                "currentUser": "/web/currentuser",
+                "site": "/site",
+                "web": "/web",
+                "webs": "/web/webs",
+                "lists": "/web/lists?$select=Id,Title,BaseTemplate,ItemCount,Created,LastItemModifiedDate",
+                "list": "/web/lists(guid'{0}')",
+                "listItems": "/web/lists(guid'{0}')/items",
+                "contentTypes": "/web/contenttypes",
+                "features": "/web/features",
+                "fields": "/web/fields",
+                "roleDefinitions": "/web/roledefinitions",
+                "groups": "/web/sitegroups",
+                "groupUsers": "/web/sitegroups({0})/users",
+                "webUsers": "/web/siteusers",
+                "files": "/web/getfolderbyserverrelativeurl('{0}')/files",
+                "folders": "/web/getfolderbyserverrelativeurl('{0}')/folders",
+                "search": "/search/query?querytext='{0}'",
+                "userProfiles": "/SP.UserProfiles.PeopleManager/GetMyProperties",
+                "taxonomy": "/SP.Taxonomy.TaxonomySession",
+                "regionalSettings": "/web/regionalsettings",
+                "allProperties": "/web/allproperties"
+            },
+            "headers": {
+                "Accept": "application/json;odata=verbose",
+                "Content-Type": "application/json;odata=verbose"
+            }
+        }
+    },
+    "queries": {
+        "siteCollections": {
+            "allSiteCollections": "SELECT Url, Owner, SecondaryContact, WebTemplate, Created FROM SiteCollection",
+            "specificSiteCollection": "SELECT Url, Owner, SecondaryContact, WebTemplate, Created FROM SiteCollection WHERE Url = '{0}'"
+        },
+        "webs": {
+            "allWebs": "SELECT Url, Title, Description, Created, Author, WebTemplate FROM Webs",
+            "specificWeb": "SELECT Url, Title, Description, Created, Author, WebTemplate FROM Webs WHERE Url = '{0}'"
+        },
+        "lists": {
+            "allLists": "SELECT Title, RootFolder, Description, ItemCount, Created, LastItemModifiedDate, Hidden, BaseTemplate FROM Lists WHERE Hidden = 'False'",
+            "documentLibraries": "SELECT Title, RootFolder, Description, ItemCount, Created, LastItemModifiedDate FROM Lists WHERE BaseTemplate = 101",
+            "specificList": "SELECT Title, RootFolder, Description, ItemCount, Created, LastItemModifiedDate FROM Lists WHERE Title = '{0}'"
+        },
+        "users": {
+            "allUsers": "SELECT Id, Title, UserName, Email, IsSiteAdmin, Groups FROM UserInfo",
+            "specificUser": "SELECT Id, Title, UserName, Email, IsSiteAdmin, Groups FROM UserInfo WHERE Email = '{0}'"
+        },
+        "permissions": {
+            "roleDefinitions": "SELECT Title, Description, Hidden, RoleTypeKind FROM RoleDefinition",
+            "siteGroups": "SELECT ID, Title, Description, Owner FROM SiteGroups",
+            "groupUsers": "SELECT Title, UserName, Email FROM UserInfo WHERE IsSiteAdmin = 1",
+            "webPermissions": "SELECT RoleAssignments FROM Webs WHERE Url = '{0}'"
+        }
+    },
+    "csom": {
+        "objectPaths": {
+            "site": "Site",
+            "web": "Web",
+            "lists": "Web.Lists",
+            "list": "Web.Lists.GetByTitle('{0}')",
+            "users": "Web.SiteUsers",
+            "user": "Web.SiteUsers.GetById({0})",
+            "groups": "Web.SiteGroups",
+            "group": "Web.SiteGroups.GetById({0})",
+            "roleDefinitions": "Web.RoleDefinitions",
+            "roleDefinition": "Web.RoleDefinitions.GetById({0})",
+            "contentTypes": "Web.ContentTypes",
+            "contentType": "Web.ContentTypes.GetById('{0}')",
+            "fields": "Web.Fields",
+            "field": "Web.Fields.GetByInternalNameOrTitle('{0}')",
+            "features": "Web.Features",
+            "feature": "Web.Features.GetById('{0}')"
+        },
+        "properties": {
+            "site": ["Id", "Url", "ServerRelativeUrl", "Owner", "SecondaryContact"],
+            "web": ["Id", "Title", "Description", "Url", "ServerRelativeUrl", "Created", "LastItemModifiedDate", "WebTemplate", "HasUniqueRoleAssignments"],
+            "list": ["Id", "Title", "Description", "BaseTemplate", "ItemCount", "Hidden", "Created", "LastItemModifiedDate", "HasUniqueRoleAssignments"],
+            "user": ["Id", "Title", "LoginName", "Email", "IsSiteAdmin"],
+            "group": ["Id", "Title", "Description", "Owner", "Users"],
+            "roleDefinition": ["Id", "Name", "Description", "RoleTypeKind", "Hidden", "BasePermissions"],
+            "contentType": ["Id", "Name", "Description", "Group", "Hidden", "Sealed"],
+            "field": ["Id", "Title", "InternalName", "Description", "Type", "Hidden", "Required"],
+            "feature": ["Id", "DisplayName", "DefinitionId"]
+        }
+    }
+} 
