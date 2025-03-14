@@ -11,13 +11,13 @@ This document outlines the detailed plan of action for implementing the SharePoi
 ### **1.1. Initialize Repository Structure (Day 1)**
 - [x] Create GitHub repository "sharepoint-data-collector"
 - [x] Set up the following directory structure:
-  - `src/`
-  - `src/modules/`
-  - `src/config/`
-  - `logs/`
-  - `output/`
-  - `tests/`
-  - `docs/`
+  - [x] `src/`
+  - [x] `src/modules/`
+  - [x] `src/config/`
+  - [x] `logs/`
+  - [x] `output/`
+  - [x] `tests/`
+  - [x] `docs/`
 - [x] Create initial README.md with project description and placeholder sections
 - [x] Set up .gitignore file with the following patterns:
   ```
@@ -87,31 +87,31 @@ This document outlines the detailed plan of action for implementing the SharePoi
 ## **Phase 3: SharePoint Access Methods (Weeks 2-3)**
 
 ### **3.1. SharePoint Management Shell Method (Days 9-10)**
-- [ ] Create initial structure in `src/modules/SPCmdletHelper.psm1`
-- [ ] Implement the following functions:
-  - [ ] `Test-SPCmdletsAvailability` - Checks if SP cmdlets are available
-  - [ ] `Connect-SPCmdlets` - Loads SharePoint snap-in or module
-  - [ ] `Get-SPSiteCollections` - Retrieves all site collections
-  - [ ] `Get-SPWebDetails` - Gets detailed web properties
-  - [ ] `Get-SPDocumentLibraries` - Lists document libraries
-  - [ ] `Get-SPListsAndViews` - Gets lists and views
-  - [ ] `Get-SPUserPermissions` - Retrieves user permissions
-  - [ ] `Export-SPCmdletData` - Exports all collected data
+- [x] Create initial structure in `src/modules/SPCmdletHelper.psm1`
+- [x] Implement the following functions:
+  - [x] `Test-SPCmdletsAvailability` - Checks if SP cmdlets are available
+  - [x] `Connect-SPCmdlets` - Loads SharePoint snap-in or module
+  - [x] `Get-SPSiteCollections` - Retrieves all site collections
+  - [x] `Get-SPWebDetails` - Gets detailed web properties
+  - [x] `Get-SPDocumentLibraries` - Lists document libraries
+  - [x] `Get-SPListsAndViews` - Gets lists and views
+  - [x] `Get-SPUserPermissions` - Retrieves user permissions
+  - [x] `Export-SPCmdletData` - Exports all collected data
 
 ### **3.2. CSOM Method (Days 11-13)**
-- [ ] Create `src/modules/CSOMHelper.psm1` with the following functions:
-  - [ ] `Initialize-CSOM` - Attempts to load CSOM assemblies dynamically
-  - [ ] `Connect-CSOM` - Establishes CSOM connection with credentials
-  - [ ] `Get-CSOMSiteData` - Retrieves site information
-  - [ ] `Get-CSOMWebData` - Gets web properties and details
-  - [ ] `Get-CSOMListData` - Retrieves list information
-  - [ ] `Get-CSOMUserData` - Gets user information
-  - [ ] `Get-CSOMPermissionData` - Retrieves permission details
-  - [ ] `Export-CSOMData` - Exports all collected CSOM data
-- [ ] Implement multiple authentication methods:
-  - [ ] Windows Authentication
-  - [ ] Forms Authentication
-  - [ ] Modern Authentication (ADAL)
+- [x] Create `src/modules/CSOMHelper.psm1` with the following functions:
+  - [x] `Initialize-CSOM` - Attempts to load CSOM assemblies dynamically
+  - [x] `Connect-CSOM` - Establishes CSOM connection with credentials
+  - [x] `Get-CSOMSiteData` - Retrieves site information
+  - [x] `Get-CSOMWebData` - Gets web properties and details
+  - [x] `Get-CSOMListData` - Retrieves list information
+  - [x] `Get-CSOMUserData` - Gets user information
+  - [x] `Get-CSOMPermissionData` - Retrieves permission details
+  - [x] `Export-CSOMData` - Exports all collected CSOM data
+- [x] Implement multiple authentication methods:
+  - [x] Windows Authentication
+  - [x] Forms Authentication
+  - [x] Modern Authentication (ADAL)
 
 ### **3.3. REST API Method (Days 14-16)**
 - [ ] Create `src/modules/RESTHelper.psm1` with the following functions:
@@ -205,7 +205,7 @@ This document outlines the detailed plan of action for implementing the SharePoi
 - [ ] Create integration test documentation
 
 ### **6.3. Documentation & Usage Guide (Day 27)**
-- [ ] Complete `docs/TECH_SPEC.md`
+- [x] Complete `docs/TECH_SPEC.md`
 - [ ] Create comprehensive `docs/USAGE.md` with:
   - [ ] Installation instructions
   - [ ] Configuration options

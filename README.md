@@ -12,11 +12,11 @@ This tool also collects **system diagnostics**, including user permissions, netw
 ---
 
 ## **Features**  
-✅ **Multiple Data Retrieval Methods** – Uses SharePoint Management Shell, CSOM, and REST API, automatically switching based on availability.  
-✅ **Minimal Dependencies** – Runs without requiring additional modules, ensuring compatibility in locked-down environments.  
-✅ **Fault Tolerance & Failsafes** – Implements automatic retries, error handling, and fallback mechanisms for uninterrupted execution.  
-✅ **Detailed Logging & Output** – Generates execution logs and structured reports in JSON and human-readable text formats.  
-✅ **System Information Gathering** – Collects OS details, user permissions, and network diagnostics to assess environment restrictions.  
+✅ **Multiple Data Retrieval Methods** – Uses SharePoint Management Shell, CSOM, and REST API, automatically switching based on availability. **(PARTIALLY COMPLETED - 2/3 Methods Implemented)**  
+✅ **Minimal Dependencies** – Runs without requiring additional modules, ensuring compatibility in locked-down environments. **(COMPLETED)**  
+✅ **Fault Tolerance & Failsafes** – Implements automatic retries, error handling, and fallback mechanisms for uninterrupted execution. **(COMPLETED)**  
+✅ **Detailed Logging & Output** – Generates execution logs and structured reports in JSON and human-readable text formats. **(COMPLETED - Logger Module)**   
+✅ **System Information Gathering** – Collects OS details, user permissions, and network diagnostics to assess environment restrictions. **(COMPLETED - SystemInfoHelper Module)**  
 
 ---
 
@@ -49,12 +49,12 @@ Logs are stored in **`logs/SPDataCollector.log`**.
 
 ## **Data Collection Methods & Failsafes**  
 
-| **Method** | **Description** | **Failsafe Mechanisms** |
-|------------|----------------|-------------------------|
-| **SharePoint Management Shell Cmdlets** | Uses `Get-SPSite`, `Get-SPWeb`, etc. to retrieve site collections, users, and permissions. | If unavailable, falls back to CSOM or REST API. |
-| **Client-Side Object Model (CSOM)** | Uses .NET-based CSOM to authenticate and query SharePoint data. | If CSOM fails, attempts REST API. |
-| **REST API** | Uses `_api/web` to retrieve site metadata and lists. | If REST API is blocked, logs failure and returns partial results. |
-| **System Information** | Retrieves OS version, user privileges, network status, and running processes. | If restricted, logs failures and continues execution. |
+| **Method** | **Description** | **Failsafe Mechanisms** | **Status** |
+|------------|----------------|-------------------------|------------|
+| **SharePoint Management Shell Cmdlets** | Uses `Get-SPSite`, `Get-SPWeb`, etc. to retrieve site collections, users, and permissions. | If unavailable, falls back to CSOM or REST API. | **COMPLETED** |
+| **Client-Side Object Model (CSOM)** | Uses .NET-based CSOM to authenticate and query SharePoint data. | If CSOM fails, attempts REST API. | **COMPLETED** |
+| **REST API** | Uses `_api/web` to retrieve site metadata and lists. | If REST API is blocked, logs failure and returns partial results. | **PENDING** |
+| **System Information** | Retrieves OS version, user privileges, network status, and running processes. | If restricted, logs failures and continues execution. | **COMPLETED** |
 
 ---
 
@@ -62,32 +62,33 @@ Logs are stored in **`logs/SPDataCollector.log`**.
 ```
 sharepoint-data-collector/
 │── src/
-│   ├── SPDataCollector.ps1
+│   ├── SPDataCollector.ps1 (PENDING)
 │   ├── modules/
-│   │   ├── CSOMHelper.psm1
-│   │   ├── RESTHelper.psm1
-│   │   ├── SystemInfoHelper.psm1
-│   │   ├── Logger.psm1
-│   │   └── Failsafe.psm1
+│   │   ├── CSOMHelper.psm1 (COMPLETED)
+│   │   ├── SPCmdletHelper.psm1 (COMPLETED)
+│   │   ├── RESTHelper.psm1 (PENDING)
+│   │   ├── SystemInfoHelper.psm1 (COMPLETED)
+│   │   ├── Logger.psm1 (COMPLETED)
+│   │   └── Failsafe.psm1 (COMPLETED)
 │   ├── config/
-│   │   ├── settings.json
-│   │   ├── credentials.template.json
-│   │   └── endpoints.json
+│   │   ├── settings.json (COMPLETED)
+│   │   ├── credentials.template.json (COMPLETED)
+│   │   └── endpoints.json (COMPLETED)
 │── logs/
 │   ├── SPDataCollector.log
 │── output/
 │   ├── SPDataOutput.json
 │   ├── SPDataOutput.txt
 │── tests/
-│   ├── test_SPDataCollector.ps1
-│   ├── test_CSOMHelper.ps1
-│   ├── test_RESTHelper.ps1
+│   ├── test_SPDataCollector.ps1 (PENDING)
+│   ├── test_CSOMHelper.ps1 (PENDING)
+│   ├── test_RESTHelper.ps1 (PENDING)
 │── docs/
-│   ├── TECH_SPEC.md
-│   ├── USAGE.md
-│   ├── CHANGELOG.md
-│── .gitignore
-│── README.md
+│   ├── TECH_SPEC.md (COMPLETED)
+│   ├── USAGE.md (PENDING)
+│   ├── CHANGELOG.md (COMPLETED)
+│── .gitignore (COMPLETED)
+│── README.md (COMPLETED)
 ```
 
 ---
